@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!---Adding Page Title-->
+    <title>HighRadius Front</title>
+    <!--linking my css file--->
+    <link rel="stylesheet" href="High_Radius.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+</head>
+<body >
+    <!--Creating the id of outer background --->
+    <div id=outerbackground>
+        <img id=highlogo src="/Logo/logo.png" alt="highradius">
+        <img id=abc src="/Logo/Group 20399.png" alt="ABC">
+        <div id="invoice_list">Invoice List</div>
+        <!--Creating the inner table background division--->
+        <div id=TableBackground>
+            <div id="btn">
+                <!--Creating the input type --->
+                <input type="text" id= "search" placeholder="Search by Invoice Number">
+                <!---creating button-->
+                <button  type="submit" id="del" class="delete_btn"> - Delete</button> </button> 
+                <button  type="submit" id="edit" class="bttn"> / Edit</button>
+                <button  type="submit" id="add" class="add_button"> + Add </button>
+            </div>
+                <!-- Creating table division--->
+            <div id="tbl">
+                <table id="tableinfo" cellpadding=14>
+                    <tr>
+                        <td><input type="checkbox" name="select" onclick='highlight_all();'></td>
+                        <th>name_customer</th>
+                        <th>cust_number</th>
+                        <th>invoice_id</th>
+                        <th>total_open_amount</th>
+                        <th>due_in_date</th>
+                        <th>Predicted_Date</th>
+                        <th>Notes</th>
+                    </tr>
+                    <!--creating table data body--->
+                    <tbody id="table_data">
+
+                    </tbody>
+                </table>
+                
+                
+
+            </div>
+        </div>
+        <!-----Creating navigation to go back-forth in a table----->
+        <div class = "page-left-right">
+                    <button id = "page-left"><span class = "arrows"><</span></button>
+                    <button id = "page-right"><span class = "arrows">></span></button>
+        </div>
+        <!---Creating ovelay as hidden------>
+        <div class="overlay hidden"></div>
+        <!--Creating Delete Button-->
+        <div class = "delete-form hidden">
+            <!-----Creating Header------->
+            <div class = "delete-header">
+                <p id = "delete-heading">Delete Record(s)?</p>
+                <button id = "delete-crossing"></button>
+            </div>
+            <!-----Displaying Delete message------->
+            <div class = "deleting-body">
+                <p id = "delete-info">
+                    You'll lose your record(s) after this action. We can't recover them once you delete.
+                    <br>
+                    <br>
+                    Are you sure you want to <span style = "color : #FF5E5E">permanently delete</span> them?
+                </p>
+            </div>
+            <!-----Creating Delete footer------->
+            <div class = "delete-footer">
+                <button id = "delete-cancel">Cancel</button>
+                <button id = "delete-delete">Delete</button>
+            </div>
+        </div>
+        <!--Creating Edit Button-->
+        <div class = "edit-form hidden">
+            <div id = "edit-header">
+                <p id = "edit-heading">Edit Invoice</p>
+                <button id = "edit-cross"></button>
+            </div>
+            <!-----Creating edit input type in body------->
+            <div class = "edit-body">
+                <div class = "edit-amount">
+                    <p id = "invoice-amount" >total_open_amount</p>
+                    <input id = "edit-amount-input" type = "text"/>
+                </div>
+                <div class = "edit-notes">
+                    <p id = "notes">Notes</p>
+                    <input id = "edit-notes-input" type = "text"/>
+                </div>
+            </div>
+            <!-----Creating edit foot side------->
+            <div class = "edit-footer">
+                <button id = "edit-cancel">Cancel</button>
+                <div class = "edit-foot-right">
+                    <button id = "edit-reset">Reset</button>
+                    <button id = "edit-save">Save</button>
+                </div>
+            </div>
+        </div>
+        <!--- Creating Add Button-->
+        <div class = "add-form hidden">
+            <!----Creating the header side----->
+            <div class = "add-header">
+                <p id = "add-heading">Add Invoice</p>
+                <button id = "add-crossing"></button>
+            </div>
+            <!----Creating the input types that are required to add a data----->
+            <div class = "add-body">
+                <div class = "add-left">
+                    <div class = "add-cust-name">
+                        <label id = "add-cust-name-label" for = "cust-name">name_customer <span style = "color : #FF5B5B">*</span></label>
+                        <input id = "add-cust-name-input" style="margin-left:1.2vw" type = "text" name = "cust-name"/>
+                    </div>
+                    <div class = "add-cust-no">
+                        <label id = "add-cust-no-label" for = "cust-no">cust_number <span style = "color : #FF5B5B">*</span></label>
+                        <input id = "add-cust-no-input" type = "text" style="margin-left:2.5vw" name = "cust-no"/>
+                    </div>
+                    <div class = "add-invoice-no">
+                        <label id = "add-invoice-no-label" for = "invoice-no">invoice_id <span style = "color : #FF5B5B">*</span></label>
+                        <input id = "add-invoice-no-input" type = "text" style="margin-left:3.95vw" name = "invoice-no"/>
+                    </div>
+                    <div class = "add-invoice-amt">
+                        <label id = "add-invoice-amt-labels" for = "amt">total_open_amount <span style = "color : #FF5B5B">*</span></label>
+                        <input id = "add-invoice-amt-input" type = "text" style="margin-left:1.5vw" name = "amt"/>
+                    </div>
+                </div>
+                <div class = "add-right">
+                    <div class = "add-due">
+                        <label id = "add-calender-label" for = "due">due_in_date <span style = "color : #FF5B5B">*</span></label>
+                        <input id = "add-calender-input" type="date" style="margin-left:1.0vw" name = "due">
+                    </div>
+                    <div class = "add-notes">
+                        <label id = "add-notes-label" for = "notes-add">Notes</label>
+                        <input id = "add-notes-input" type = "text" style="margin-left:1.2vw" name = "notes-add"/>
+                    </div>
+                </div>
+            </div>
+            <!----Creating the foot side buttons----->
+            <div class = "add-footer">
+                <button id = "add-cancel">Cancel</button>
+                <div class = "add-foot-right">
+                    <button id = "add-reset">Clear</button>
+                    <button id = "add-save">Add</button>
+                </div>
+            </div>
+        </div>
+</body>
+<!----Creating fucntion for check boxes to select indiviually and then select all----->
+<script>
+	function highlight(id)
+	{
+		object = document.getElementById(id).style.backgroundColor;
+		id_num = Number(id);
+
+		if (object == "rgb(42, 83, 104)")
+		{
+			if(id_num % 2 == 0)
+				document.getElementById(id).style.backgroundColor = "#283A46";
+			else
+				document.getElementById(id).style.backgroundColor = "#273D49CC"
+		} else
+			document.getElementById(id).style.backgroundColor = "#2A5368";
+	}
+	function highlight_all()
+	{
+		for (let id = 1; id <= 10; id++)
+		{
+			let x = document.getElementById(id);
+			var checkBoxes = x.getElementsByTagName("INPUT");
+			(checkBoxes[0].checked)? checkBoxes[0].checked = false : checkBoxes[0].checked = true;			
+			highlight(id);
+		}
+	}
+</script>
+<!----Linking my JS file----->
+<script type="text/javascript" src="HighRadius.js"></script>
+</html>
